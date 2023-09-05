@@ -9,6 +9,7 @@ class LinkedList {
     this.list = null;
   }
 
+  //   Methods
   append(value) {
     const newNode = new Node(value, null);
     if (this.list === null) {
@@ -26,13 +27,13 @@ class LinkedList {
     this.list = newNode;
   }
 
-  size() {}
-
-  findLastNode(node) {
-    if (node.nextNode === null) {
-      return node;
+  size(count = 0) {
+    if (this.list === null) {
+      return count;
+    } else if (this.list.nextNode === null) {
+      return (count += 1);
     } else {
-      return this.findLastNode(node.nextNode);
+      return this.findSize(this.list, count + 1);
     }
   }
 
@@ -53,6 +54,39 @@ class LinkedList {
       return this.list;
     }
   }
+
+  at(index) {
+    const listSize = this.size();
+    return this.findSpecificNode(this.list, listSize - index);
+  }
+
+  // Recursive functions
+  findLastNode(node = this.list) {
+    if (node.nextNode === null) {
+      return node;
+    } else {
+      return this.findLastNode(node.nextNode);
+    }
+  }
+
+  findSize(node, count) {
+    if (node.nextNode === null) {
+      return count;
+    } else {
+      return this.findSize(node.nextNode, count + 1);
+    }
+  }
+
+  findSpecificNode(node, count) {
+    const listSize = this.size();
+    if (count === listSize) {
+      return node;
+    } else if (node.nextNode === null) {
+      return "Node doesn't exist";
+    } else {
+      return this.findSpecificNode(node.nextNode, count + 1);
+    }
+  }
 }
 
 const list = new LinkedList();
@@ -64,4 +98,8 @@ list.append("node 5");
 list.append("node 6");
 list.append("node 7");
 list.prepend("node 0");
-console.log(list.head());
+// console.log(list.head());
+// console.log(list.tail());
+// console.log(list.findLastNode());
+// console.log(list.size());
+console.log(list.at(8));
