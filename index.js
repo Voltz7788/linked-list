@@ -51,6 +51,10 @@ class LinkedList {
     secondLastNode.nextNode = null;
   }
 
+  contains(value) {
+    return this.list === null ? false : this.findContains(this.list, value);
+  }
+
   // Recursive functions
   findLastNode(node = this.list) {
     if (node.nextNode === null) {
@@ -78,6 +82,16 @@ class LinkedList {
       return this.findSpecificNode(node.nextNode, count + 1);
     }
   }
+
+  findContains(node, value) {
+    if (node.value !== value && node.nextNode === null) {
+      return false;
+    } else if (node.value === value) {
+      return true;
+    } else {
+      return this.findContains(node.nextNode, value);
+    }
+  }
 }
 
 const list = new LinkedList();
@@ -93,7 +107,8 @@ console.log(list.head());
 console.log(list.tail());
 console.log(list.size());
 console.log(list.at(6));
-list.pop();
-list.pop();
-list.pop();
+// list.pop();
+// list.pop();
+// list.pop();
 console.log(list.head());
+console.log(list.contains("node 7"));
