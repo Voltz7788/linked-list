@@ -23,18 +23,11 @@ class LinkedList {
   }
 
   prepend(value) {
-    this.list = new Node(value, this.list);
+    this.list =
+      this.list === null ? new Node(value, null) : new Node(value, this.list);
   }
 
   size(count = 0) {
-    // if (this.list === null) {
-    //   return count;
-    // } else if (this.list.nextNode === null) {
-    //   return (count += 1);
-    // } else {
-    //   return this.findSize(this.list, count + 1);
-    // }
-
     if (this.list === null) return count;
     return this.list.nextNode === null
       ? (count += 1)
@@ -51,6 +44,11 @@ class LinkedList {
 
   at(index) {
     return this.findSpecificNode(this.list, this.size() - index);
+  }
+
+  pop() {
+    const secondLastNode = this.at(this.size() - 2);
+    secondLastNode.nextNode = null;
   }
 
   // Recursive functions
@@ -91,8 +89,11 @@ list.append("node 5");
 list.append("node 6");
 list.append("node 7");
 list.prepend("node 0");
-// console.log(list.head());
-// console.log(list.tail());
-// console.log(list.findLastNode());
+console.log(list.head());
+console.log(list.tail());
 console.log(list.size());
-console.log(list.at(0));
+console.log(list.at(6));
+list.pop();
+list.pop();
+list.pop();
+console.log(list.head());
