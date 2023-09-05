@@ -23,41 +23,34 @@ class LinkedList {
   }
 
   prepend(value) {
-    const newNode = new Node(value, this.list);
-    this.list = newNode;
+    this.list = new Node(value, this.list);
   }
 
   size(count = 0) {
-    if (this.list === null) {
-      return count;
-    } else if (this.list.nextNode === null) {
-      return (count += 1);
-    } else {
-      return this.findSize(this.list, count + 1);
-    }
+    // if (this.list === null) {
+    //   return count;
+    // } else if (this.list.nextNode === null) {
+    //   return (count += 1);
+    // } else {
+    //   return this.findSize(this.list, count + 1);
+    // }
+
+    if (this.list === null) return count;
+    return this.list.nextNode === null
+      ? (count += 1)
+      : this.findSize(this.list, count + 1);
   }
 
   tail() {
-    if (this.list === null) {
-      console.log("Empty list");
-      return;
-    } else {
-      return this.findLastNode(this.list);
-    }
+    return this.list === null ? "Empty list" : this.findLastNode(this.list);
   }
 
   head() {
-    if (this.list === null) {
-      console.log("Empty list");
-      return;
-    } else {
-      return this.list;
-    }
+    return this.list === null ? "Empty list" : this.list;
   }
 
   at(index) {
-    const listSize = this.size();
-    return this.findSpecificNode(this.list, listSize - index);
+    return this.findSpecificNode(this.list, this.size() - index);
   }
 
   // Recursive functions
@@ -101,5 +94,5 @@ list.prepend("node 0");
 // console.log(list.head());
 // console.log(list.tail());
 // console.log(list.findLastNode());
-// console.log(list.size());
-console.log(list.at(8));
+console.log(list.size());
+console.log(list.at(0));
