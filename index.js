@@ -59,6 +59,12 @@ class LinkedList {
     return this.list === null ? null : this.findValue(this.list, value);
   }
 
+  toString() {
+    return this.list === null
+      ? "This list is empty"
+      : this.getStringValues(this.list);
+  }
+
   // Recursive functions
   findLastNode(node = this.list) {
     if (node.nextNode === null) {
@@ -106,6 +112,28 @@ class LinkedList {
       return this.findValue(node.nextNode, value, count + 1);
     }
   }
+
+  getStringValues(node, valueString = "") {
+    if (valueString === "") {
+      return node.nextNode === null
+        ? `${node.value} -> null`
+        : this.getStringValues(node.nextNode, `${node.value}`);
+    } else {
+      return node.nextNode === null
+        ? `${valueString} -> ${node.value} -> null`
+        : this.getStringValues(
+            node.nextNode,
+            `${valueString} -> ${node.value}`
+          );
+    }
+
+    // return node.nextNode === null
+    //   ? `${valueString === "" ? "" : `${valueString} ->`} ${node.value} -> null`
+    //   : this.getStringValues(
+    //       node.nextNode,
+    //       `${valueString === "" ? "" : `${valueString} ->`} ${node.value}`
+    //     );
+  }
 }
 
 const list = new LinkedList();
@@ -127,3 +155,4 @@ console.log(list.at(6));
 console.log(list.head());
 console.log(list.contains("node 7"));
 console.log(list.find("node 5"));
+console.log(list.toString());
